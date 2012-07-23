@@ -21,17 +21,19 @@ void loop()
   if (Serial.available() > 0) {
     // read the oldest byte in the serial buffer:
     incomingByte = Serial.read();
-    // Si recibo una S apago el acelerómetro y enciendo el LED
-    if (incomingByte == 'S') {
+    switch(incomingByte){
+    case 'S':
+      // Si recibo una S apago el acelerómetro y enciendo el LED
       accelSleep = LOW;
       digitalWrite(4, accelSleep);
       digitalWrite(13, HIGH);
-    } 
-    // Si recibo una W enciendo el acelerómetro y apago el LED
-    if (incomingByte == 'W') {
+      break;
+    case 'W':
+      // Si recibo una W enciendo el acelerómetro y apago el LED
       accelSleep = HIGH;
       digitalWrite(4, accelSleep);
       digitalWrite(13, LOW);
+      break;
     }
   }
 
@@ -64,5 +66,8 @@ void loop()
     delay(100);
   }
 }
+
+
+
 
 
