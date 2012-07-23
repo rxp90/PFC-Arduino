@@ -1,34 +1,43 @@
 int incomingByte;
+boolean accelSleep;
 void setup()
 {  
   // Configuración puerto Serie
   Serial.begin(9600); // 9600 bps
+  accelSleep = HIGH;
   // Ponemos en alto la entrada ¬ SLEEP
-  digitalWrite(4, HIGH);
+  digitalWrite(4, accelSleep);
   // Para ganar precisión se usa una fuente de referencia externa (3.3V) 
   analogReference(EXTERNAL);
   pinMode(13,OUTPUT);
+
+  // Apago el LED 13
   digitalWrite(13, LOW);
 }
 
 void loop()
 {
 
-
   if (Serial.available() > 0) {
     // read the oldest byte in the serial buffer:
     incomingByte = Serial.read();
-    // if it's a capital H (ASCII 72), turn on the LED:
+    // Si recibo una S apago el acelerómetro y enciendo el LED
     if (incomingByte == 'S') {
-      digitalWrite(4, LOW);    
+      accelSleep = LOW;
+      digitalWrite(4, accelSleep);
       digitalWrite(13, HIGH);
     } 
-    // if it's an L (ASCII 76) turn off the LED:
+    // Si recibo una W enciendo el acelerómetro y apago el LED
     if (incomingByte == 'W') {
-      digitalWrite(4, HIGH);    
+      accelSleep = HIGH;
+      digitalWrite(4, accelSleep);
       digitalWrite(13, LOW);
     }
   }
+
+  // Acelerómetro encendido: envío datos.
+  if(accelSleep == HIGH){
+
     // Valor de x entre 0 y 1023
     float x = analogRead(A5);
     // Valor de x entre 0 y 1023
@@ -53,4 +62,7 @@ void loop()
     Serial.print(",");
     Serial.println(z);
     delay(100);
+  }
 }
+
+
