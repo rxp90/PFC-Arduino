@@ -27,12 +27,16 @@ void loop()
       accelSleep = LOW;
       digitalWrite(4, accelSleep);
       digitalWrite(13, HIGH);
+      Serial.println('S');
+      delay(1000);
       break;
     case 'W':
       // Si recibo una W enciendo el acelerómetro y apago el LED
       accelSleep = HIGH;
       digitalWrite(4, accelSleep);
       digitalWrite(13, LOW);
+      Serial.println('W');
+      delay(1000);
       break;
     }
   }
@@ -66,6 +70,7 @@ void loop()
     delay(100);
   }
 }
+
 
 
 
