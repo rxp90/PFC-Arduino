@@ -1,6 +1,5 @@
 int incomingByte;
 boolean accelSleep;
-int i;
 void setup()
 {  
   // Configuración puerto Serie
@@ -11,8 +10,6 @@ void setup()
   // Para ganar precisión se usa una fuente de referencia externa (3.3V) 
   analogReference(EXTERNAL);
   pinMode(13,OUTPUT);
-
-  i = 1;
 
   // Apago el LED 13
   digitalWrite(13, LOW);
@@ -64,17 +61,22 @@ void loop()
     z = (z - 0.60) * (2) / (2.21-0.60) -1;
 
     // Imprimo los valores
-    Serial.print("i=");
-    Serial.print(i);
+    Serial.print("IT");
+    Serial.print("x");
     Serial.print(x);
     Serial.print(",");
+    Serial.print("y");
     Serial.print(y); 
     Serial.print(",");
+    Serial.print("z");
     Serial.println(z);
-    i = i+1;
+    Serial.print("FT");
+
     delay(100);
   }
 }
+
+
 
 
 
