@@ -69,8 +69,8 @@ void loop()
     Serial.print(y); 
     Serial.print(",");
     Serial.print("z");
-    Serial.println(z);
-    Serial.print("FT");
+    Serial.print(z);
+    Serial.println("FT");
 
     delay(100);
   }
