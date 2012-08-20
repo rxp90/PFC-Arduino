@@ -74,10 +74,10 @@ void loop()
       Serial.println('W');
       delay(1000);
       break;
-    case 'E':
-      // Si recibo una E habilito la lectura del GPS
+    case 'G':
+      // Si recibo una G habilito la lectura del GPS
       gpsActive = HIGH;
-      Serial.println('E');
+      Serial.println('G');
       delay(1000);
       break;
     case 'D':
