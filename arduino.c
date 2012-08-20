@@ -71,7 +71,7 @@ void loop()
     // Imprimo los valores
     Serial.print("IT");
     // Datos de direccionamiento de XBee
-    Serial.print("MY"=);
+    Serial.print("MY=");
     Serial.print(direccionNodo);
     Serial.print(",");
     Serial.print("ID=");
