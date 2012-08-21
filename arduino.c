@@ -84,6 +84,7 @@ void loop()
     Serial.print(",");
     Serial.print("DL=");
     Serial.print(direccionReceptor);
+    Serial.print(",");
     // Datos de sensores
     Serial.print("x=");
     Serial.print(x);
