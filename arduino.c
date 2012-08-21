@@ -1,9 +1,11 @@
 // Valor de MY en XBee (ATMY)
-#define direccionNodo 0x1
+#define direccionMando 0x1
 // Valor de ID en XBee (ATID)
 #define idRed 0x3332
 // Canal de comunicación XBee (ATCH)
 #define canal 0xC
+// Dirección del receptor (ATDL)
+#define direccionReceptor 0x2
 
 int incomingByte;
 boolean accelSleep;
@@ -72,7 +74,7 @@ void loop()
     Serial.print("IT");
     // Datos de direccionamiento de XBee
     Serial.print("MY=");
-    Serial.print(direccionNodo);
+    Serial.print(direccionMando);
     Serial.print(",");
     Serial.print("ID=");
     Serial.print(idRed);
@@ -80,6 +82,8 @@ void loop()
     Serial.print("CH=");
     Serial.print(canal);
     Serial.print(",");
+    Serial.print("DL=");
+    Serial.print(direccionReceptor);
     // Datos de sensores
     Serial.print("x=");
     Serial.print(x);
