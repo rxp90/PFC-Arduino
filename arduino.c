@@ -7,9 +7,11 @@
 // Dirección del receptor (ATDL)
 #define direccionReceptor 0x2
 
-int incomingByte;
 boolean accelSleep;
-
+char inData[20]; // Allocate some space for the string
+char inChar; // Where to store the character read
+byte index = 0; // Index into array; where to store the character
+String cadenaIdentificacion = String(direccionMando) + "," + String(idRed) + "," + String(canal) + "," + String(direccionReceptor);
 void setup()
 {  
   // Configuración puerto Serie
@@ -24,31 +26,46 @@ void setup()
   // Apago el LED 13
   digitalWrite(13, LOW);
 }
+char Comp(String This) {
+  while (Serial.available() > 0) // Don't read unless
+    // there you know there is data
+  {
+    if(index < 19) // One less than the size of the array
+    {
+      inChar = Serial.read(); // Read a character
+      inData[index] = inChar; // Store it
+      index++; // Increment where to write next
+      inData[index] = '\0'; // Null terminate the string
+    }
+  }
 
+  if ((String(inData).compareTo(This))  == 0) {
+    for (int i=0;i<19;i++) {
+      inData[i]=0;
+    }
+    index=0;
+    return(0);
+  }
+  else{
+    return (1);
+  }
+}
 void loop()
 {
-
-  if (Serial.available() > 0) {
-    // read the oldest byte in the serial buffer:
-    incomingByte = Serial.read();
-    switch(incomingByte){
-    case 'S':
-      // Si recibo una S apago el acelerómetro y enciendo el LED
-      accelSleep = LOW;
-      digitalWrite(4, accelSleep);
-      digitalWrite(13, HIGH);
-      Serial.println('OK');
-      delay(1000);
-      break;
-    case 'W':
-      // Si recibo una W enciendo el acelerómetro y apago el LED
-      accelSleep = HIGH;
-      digitalWrite(4, accelSleep);
-      digitalWrite(13, LOW);
-      Serial.println('OK');
-      delay(1000);
-      break;
-    }
+  // Compruebo si la instrucción va dirigida a este mando.
+  if (Comp(cadenaIdentificacion + ",S")==0) {
+    accelSleep = LOW;
+    digitalWrite(4, accelSleep);
+    digitalWrite(13, HIGH);
+    Serial.println('OK');
+    delay(1000);
+  }
+  if (Comp(cadenaIdentificacion + ",W")==0) {
+    accelSleep = HIGH;
+    digitalWrite(4, accelSleep);
+    digitalWrite(13, LOW);
+    Serial.println('OK');
+    delay(1000);
   }
 
   // Acelerómetro encendido: envío datos.
@@ -96,6 +113,8 @@ void loop()
     Serial.print(z);
     Serial.println("FT");
 
-    delay(100);
+    delay(50);
   }
 }
+
+
