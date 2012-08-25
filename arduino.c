@@ -11,7 +11,7 @@ boolean accelSleep;
 char inData[30]; // Allocate some space for the string
 char inChar; // Where to store the character read
 byte index = 0; // Index into array; where to store the character
-String cadenaIdentificacion = "MY="String(direccionMando) + ",ID" + String(idRed) + ",CH" + String(canal) + ",DL" + String(direccionReceptor);
+String cadenaIdentificacion = "MY="String(direccionMando) + ",ID=" + String(idRed) + ",CH=" + String(canal) + ",DL=" + String(direccionReceptor);
 void setup()
 {  
   // Configuración puerto Serie
