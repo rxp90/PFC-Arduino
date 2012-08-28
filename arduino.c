@@ -88,8 +88,9 @@ void loop()
     Serial.print(z);
     Serial.println("FT");
 
-    delay(delayMuestreo);
   }
+  delay(delayMuestreo);
+
 }
 
 void recibeInstrucciones(){
@@ -110,7 +111,12 @@ void recibeInstrucciones(){
 
   // Si el primer dato recibido coindice con el identificador del mando
   if ((String(identificadorEntrante).compareTo(cadenaIdentificacion))  == 0) {
-
+    // "Limpio" los arrays
+    for (int i=0;i<99;i++) {
+      inData[i]=0;
+      identificadorEntrante[i]=0;
+    }
+    index=0;
     // Ejecuto la instrucción asociada
     switch(instruccion){
 
@@ -118,20 +124,22 @@ void recibeInstrucciones(){
       // Apagar acelerómetro
 
       accelSleep = LOW;
+      delay(1000); 
+
       digitalWrite(4, accelSleep);
       digitalWrite(13, accelSleep);
       Serial.println("OK");
-      delay(1000);      
       break;
 
     case 2:
       // Encender acelerómetro
 
       accelSleep = HIGH;
+      delay(1000); 
+
       digitalWrite(4, accelSleep);
       digitalWrite(13, accelSleep);
       Serial.println("OK");
-      delay(1000); 
       break;
 
     case 3:      
@@ -140,16 +148,12 @@ void recibeInstrucciones(){
         delayMuestreo = aux;
       }
       Serial.println("OK");
-      delay(1000);
       break;
     }
   }  
-  // "Limpio" los arrays
-  for (int i=0;i<99;i++) {
-    inData[i]=0;
-    identificadorEntrante[i]=0;
-  }
-  index=0;
+
 }
+
+
 
 
