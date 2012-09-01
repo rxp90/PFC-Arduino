@@ -33,8 +33,8 @@ void setup()
   analogReference(EXTERNAL);
   pinMode(13,OUTPUT);
 
-  // Apago el LED 13
-  digitalWrite(13, LOW);
+  // Enciendo el LED 13
+  digitalWrite(13, accelSleep);
 }
 
 
