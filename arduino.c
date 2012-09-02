@@ -47,7 +47,7 @@ void loop()
 
     // Valor de x entre 0 y 1023
     float x = analogRead(A5);
-    // Valor de x entre 0 y 1023
+    // Valor de y entre 0 y 1023
     float y = analogRead(A4);
     // Valor de z entre 0 y 1023
     float z = analogRead(A3);
